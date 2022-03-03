@@ -1,18 +1,12 @@
-import AWS from 'aws-sdk';
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 
-export const dynamoDb = new AWS.DynamoDB(
+export const dynamoDbClient = new DynamoDBClient(
     {
-        region: 'local', // process.env.AWS_REGION,
-        endpoint: 'http://localhost:8000', // process.env.DB_ENDPOINT,
+        region: 'local',
+        endpoint: 'http://localhost:8000',
         credentials: {
-            accessKeyId: 'fake',// process.env.AWS_ACCESS_KEY_ID,
-            secretAccessKey: 'fake'// process.env.AWS_SECRET_ACCESS_KEY,
+            accessKeyId: 'fake',
+            secretAccessKey: 'fake'
         }
     }
 );
-
-export const docClient = new AWS.DynamoDB.DocumentClient({
-    region: "us-west-2",
-    endpoint: "http://localhost:8000",
-    convertEmptyValues: true
-}); 

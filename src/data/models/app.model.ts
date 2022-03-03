@@ -1,6 +1,7 @@
-import { dynamoDb } from '../db'
+import { CreateTableCommand, CreateTableCommandInput } from '@aws-sdk/client-dynamodb';
+import { dynamoDbClient } from '../db'
 
-const appTableParams = {
+const params: CreateTableCommandInput = {
     TableName: 'App',
     KeySchema: [
         {
@@ -13,18 +14,20 @@ const appTableParams = {
         { AttributeName: 'name', AttributeType: 'S' }
     ],
     ProvisionedThroughput: {
-        ReadCapacityUnits: 2,
-        WriteCapacityUnits: 2
+        ReadCapacityUnits: 1,
+        WriteCapacityUnits: 1
     }
 }
 
-export function initAppTable() {
+export async function initAppTable() {
     console.log('initAppTable');
-    dynamoDb.createTable(appTableParams, function (err, data) {
-        if(err) {
-            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
-        }
-    });
+    try {
+        const data = await dynamoDbClient.send(
+            new CreateTableCommand(params)
+        );
+        console.log("Table Created", data);
+        return data;
+    } catch(err) {
+        console.log("Error", err);
+    }
 }  
