@@ -22,13 +22,13 @@ export const putEntity = async (entity: App) => {
     }
 }
 
-export const updateEntity = async (
+/* export const updateEntity = async (
     id: string,
     entity: App
 ) => {
     const params = {
         TableName: 'Apps',
-        /*
+        
         Convert the attribute JavaScript object you are updating to the required
         Amazon  DynamoDB record. The format of values specifies the datatype. The
         following list demonstrates different datatype formatting requirements:
@@ -38,7 +38,7 @@ export const updateEntity = async (
         ListAttribute: [1, "two", false],
         MapAttribute: { foo: "bar" },
         NullAttribute: null
-         */
+        
         Key: 'id',
         // Define expressions for the new or updated attributes
         // For example, "'set Title = :t, Subtitle = :s'"
@@ -57,7 +57,7 @@ export const updateEntity = async (
     } catch(err) {
         console.error(err);
     }
-}
+} */
 
 export const getBatchEntitiesBykeys = async () => {
     const params = {
